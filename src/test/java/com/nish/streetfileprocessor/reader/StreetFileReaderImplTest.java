@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.nish.streetfileprocessor.basetest.BaseTest;
 import com.nish.streetfileprocessor.exception.StreetFileProcessingException;
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StreetFileReaderImplTest {
+public class StreetFileReaderImplTest extends BaseTest{
 	@Autowired
 	private StreetFileReader streetFileReader;
 	
-	@Before
-	public void prepare() {
-	    MockitoAnnotations.initMocks(this);
-	}
 	/**
 	 * This chcecks values loaded from file is matching
 	 */
