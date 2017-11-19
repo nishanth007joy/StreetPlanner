@@ -6,7 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nish.streetfileprocessor.model.NewspaperReportModel;
@@ -17,7 +16,6 @@ import com.nish.streetfileprocessor.service.StreetDetailsFileReaderService;
 import com.nish.streetfileprocessor.service.StreetDetailsService;
 import com.nish.streetfileprocessor.service.StreetFileValidationService;
 import com.nish.streetfileprocessor.validationcode.ValidationCode;
-import com.nish.streetfileprocessor.writer.OutputWriter;
 
 /**
  * This is main processor class which coordinates processing of input file

@@ -40,6 +40,7 @@ public class ProcessStreetFileImplTest extends BaseTest{
 	@Mock
 	private ReportCreationService reportCreationService;
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testValidateAndGroupStreetFileValid() {
 		Integer[] houseNumbers = {1,2,3,4,5,6,7};

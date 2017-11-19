@@ -2,8 +2,6 @@ package com.nish.streetfileprocessor.steprunner.stepdef.base;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
-import org.springframework.boot.test.rule.OutputCapture;
 
 public class SpringIntegrationTest {
 	

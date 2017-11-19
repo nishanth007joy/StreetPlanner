@@ -1,9 +1,6 @@
 package com.nish.streetfileprocessor.steprunner;
 
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedWriter;
@@ -14,10 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import org.junit.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.rule.OutputCapture;
 
 import com.nish.streetfileprocessor.StreetFileProcessorApplication;
 import com.nish.streetfileprocessor.exception.StreetFileProcessingException;
@@ -32,26 +27,6 @@ public class StepDefs extends SpringIntegrationTest{
 
 	private String output = null;
 	private String action = null;
-
-	//	@Rule
-	//	public OutputCapture outputCapture = new OutputCapture();
-
-	//	@Given("^Input file is placed in input folder$")
-	//	public void input_file_is_placed_in_input_folder() throws Throwable {
-	//
-	//	}
-	//
-	//	@When("^street file is processed$")
-	//	public void street_file_is_processed() throws Throwable {
-	//		StreetFileProcessorApplication.main(new String[] { "--action=VALIDATE_AND_PROCESS" });
-	//	}
-	//
-	//	@Then("^show file as valid$")
-	//	public void show_file_as_valid() throws Throwable {
-	//		log.info("entering ----------------");
-	//		//String output = this.outputCapture.toString();
-	//		//assertThat(!output.contains("Validation of file failed"));
-	//	}
 
 
 	@Given("^Input file is placed in input folder with \"([^\"]*)\" content$")
