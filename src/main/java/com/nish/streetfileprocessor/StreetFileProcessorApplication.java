@@ -1,18 +1,36 @@
 package com.nish.streetfileprocessor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 import com.nish.streetfileprocessor.processor.ProcessStreetFile;
-
+/**
+ * This is the main class to invoke program to create street file validation report and News paper delivery report
+ * @author nisha
+ *
+ */
 @SpringBootApplication
-public class StreetFileProcessorApplication {
+public class StreetFileProcessorApplication implements CommandLineRunner{
+	@Autowired
+	ProcessStreetFile processStreetFile;
+	
+	@Value("${action:World}")
+	private String action;
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = SpringApplication.run(StreetFileProcessorApplication.class, args);
-		ProcessStreetFile  processStreetFile = applicationContext.getBean(ProcessStreetFile.class);
-		processStreetFile.validateAndGroupStreetFile();
-		processStreetFile.createNewspaperDeliveryReport();
+		SpringApplication app = new SpringApplication(StreetFileProcessorApplication.class);
+		app.run(args);
+	}
+	@Override
+	public void run(String... args) throws Exception {
+
+		if (action.equals("VALIDATE_AND_PROCESS")) {
+			processStreetFile.validateAndGroupStreetFile();
+		} else if(action.equals("NEWS_PAPER_DELIVERY_REPORT")){
+			processStreetFile.createNewspaperDeliveryReport();
+		}
 	}
 }

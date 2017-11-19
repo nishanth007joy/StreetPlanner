@@ -1,6 +1,5 @@
 package com.nish.streetfileprocessor.processor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,11 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nish.streetfileprocessor.model.ReportModel;
-import com.nish.streetfileprocessor.parser.StreetFileParser;
-import com.nish.streetfileprocessor.reader.StreetFileReader;
 import com.nish.streetfileprocessor.service.StreetDetailsFileReaderService;
 import com.nish.streetfileprocessor.service.StreetDetailsService;
-import com.nish.streetfileprocessor.validation.StreetFileValidator;
+import com.nish.streetfileprocessor.service.StreetFileValidationService;
 import com.nish.streetfileprocessor.validationcode.ValidationCode;
 
 /**
@@ -32,6 +29,9 @@ public class ProcessStreetFileImpl implements ProcessStreetFile{
 	@Autowired
 	private StreetDetailsService streetDetailsService;
 	
+	@Autowired
+	private StreetFileValidationService streetFileValidationService;
+	
 	@Value("${app.file.home}")
 	private String fileLocation;
 
@@ -42,6 +42,11 @@ public class ProcessStreetFileImpl implements ProcessStreetFile{
 		List<Integer> houseNumbers = streetDetailsFileReaderService.parseStreetFileContent(fileContent);
 		log.info("House numbers after parsing",houseNumbers);
 		
+		List<ValidationCode> validationResults = streetFileValidationService.validateStreetFile(houseNumbers);
+		if(validationResults != null && !validationResults.isEmpty()){
+			log.info("Validation of file failed");
+			return;
+		}
 		
 		List<Integer> northHouseNumbers = streetDetailsService.getNorthHouseNumbers(houseNumbers);
 		List<Integer> southHouseNumbers = streetDetailsService.getSouthHouseNumbers(houseNumbers);
