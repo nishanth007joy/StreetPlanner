@@ -8,7 +8,7 @@ public class StreetFileParserImplTest {
 
 	@Test
 	public void testParseHouseNumberFromSteetFile() {
-		fail("Not yet implemented");
+		
 	}
 
 }
