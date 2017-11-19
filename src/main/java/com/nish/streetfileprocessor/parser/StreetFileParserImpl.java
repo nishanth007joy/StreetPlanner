@@ -1,5 +1,6 @@
 package com.nish.streetfileprocessor.parser;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ public class StreetFileParserImpl implements StreetFileParser{
 					.map(Integer::parseInt)
 					.collect(Collectors.toList());
 			log.debug("Leaving parseHouseNumberFromSteetFile", houseNumbers);
-			return houseNumbers;
+			return Collections.unmodifiableList(houseNumbers);
 		}
 		
 		return null;

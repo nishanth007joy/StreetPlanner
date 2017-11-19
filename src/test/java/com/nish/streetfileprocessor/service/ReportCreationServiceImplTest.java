@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import com.nish.streetfileprocessor.basetest.BaseTest;
-import com.nish.streetfileprocessor.model.ReportModel;
+import com.nish.streetfileprocessor.model.StreetModel;
 import com.nish.streetfileprocessor.validationcode.ValidationCode;
 import com.nish.streetfileprocessor.writer.OutputWriter;
 /**
@@ -33,7 +33,7 @@ public class ReportCreationServiceImplTest extends BaseTest{
 	@Test
 	public void testCreateAndSaveReportValid() {
 		doNothing().when(outputWriter).writeProcessingReport(anyString());
-		ReportModel reportModel = new ReportModel();
+		StreetModel reportModel = new StreetModel();
 		Integer[] houseNumbers = {1,3,2,5,6,7,4};
 		Integer[] northHouseNumbers = {1,3,5,7};
 		Integer[] southHouseNumbers = {2,4,6};
@@ -49,7 +49,7 @@ public class ReportCreationServiceImplTest extends BaseTest{
 	@Test
 	public void testCreateAndSaveReportInvalidDuplicate() {
 		doNothing().when(outputWriter).writeProcessingReport(anyString());
-		ReportModel reportModel = new ReportModel();
+		StreetModel reportModel = new StreetModel();
 		ValidationCode[] validationArray = {ValidationCode.HOUSE_NUMBER_HAVE_DUPLICATE};
 		reportModel.setValidationMessages(Arrays.asList(validationArray));
 		ReportCreationServiceImplTest.createAndSaveStreetPlanningReport(reportModel);
@@ -61,7 +61,7 @@ public class ReportCreationServiceImplTest extends BaseTest{
 	@Test
 	public void testCreateAndSaveReportInvalidNotStartingOnOne() {
 		doNothing().when(outputWriter).writeProcessingReport(anyString());
-		ReportModel reportModel = new ReportModel();
+		StreetModel reportModel = new StreetModel();
 		ValidationCode[] validationArray = {ValidationCode.HOUSE_NUMBER_NOT_STARTING_WITH_ONE};
 		reportModel.setValidationMessages(Arrays.asList(validationArray));
 		ReportCreationServiceImplTest.createAndSaveStreetPlanningReport(reportModel);
@@ -73,7 +73,7 @@ public class ReportCreationServiceImplTest extends BaseTest{
 	@Test
 	public void testCreateAndSaveReportInvalidMissingHouse() {
 		doNothing().when(outputWriter).writeProcessingReport(anyString());
-		ReportModel reportModel = new ReportModel();
+		StreetModel reportModel = new StreetModel();
 		ValidationCode[] validationArray = {ValidationCode.HOUSE_NUMBER_MISSING};
 		reportModel.setValidationMessages(Arrays.asList(validationArray));
 		ReportCreationServiceImplTest.createAndSaveStreetPlanningReport(reportModel);
@@ -85,7 +85,7 @@ public class ReportCreationServiceImplTest extends BaseTest{
 	@Test
 	public void testCreateAndSaveReportAllValidationFailure() {
 		doNothing().when(outputWriter).writeProcessingReport(anyString());
-		ReportModel reportModel = new ReportModel();
+		StreetModel reportModel = new StreetModel();
 		ValidationCode[] validationArray = {ValidationCode.HOUSE_NUMBER_MISSING, ValidationCode.HOUSE_NUMBER_NOT_STARTING_WITH_ONE, ValidationCode.HOUSE_NUMBER_HAVE_DUPLICATE};
 		reportModel.setValidationMessages(Arrays.asList(validationArray));
 		ReportCreationServiceImplTest.createAndSaveStreetPlanningReport(reportModel);

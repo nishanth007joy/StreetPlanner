@@ -19,6 +19,9 @@ public class StreetFileProcessorApplication implements CommandLineRunner{
 	
 	@Value("${action:World}")
 	private String action;
+	
+	@Value("${app.file.home}")
+	private String fileLocation;
 
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(StreetFileProcessorApplication.class);
@@ -28,9 +31,9 @@ public class StreetFileProcessorApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 
 		if (action.equals("VALIDATE_AND_PROCESS")) {
-			processStreetFile.validateAndGroupStreetFile();
+			processStreetFile.validateAndGroupStreetFile(fileLocation);
 		} else if(action.equals("NEWS_PAPER_DELIVERY_REPORT")){
-			processStreetFile.createNewspaperDeliveryReport();
+			processStreetFile.createNewspaperDeliveryReport(fileLocation);
 		}
 	}
 }

@@ -4,9 +4,9 @@ public interface ProcessStreetFile {
 	/**
 	 * 
 	 */
-	public void validateAndGroupStreetFile();
+	public void validateAndGroupStreetFile(String inputFileLocation);
 	/**
 	 * 
 	 */
-	public void createNewspaperDeliveryReport();
+	public void createNewspaperDeliveryReport(String inputFileLocation);
 }

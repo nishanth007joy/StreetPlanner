@@ -1,6 +1,9 @@
 package com.nish.streetfileprocessor.service;
 
-import com.nish.streetfileprocessor.model.ReportModel;
+import java.util.List;
+
+import com.nish.streetfileprocessor.model.NewspaperReportModel;
+import com.nish.streetfileprocessor.model.StreetModel;
 /**
  * This service deals with logic of creation of report and/
  * @author nisha
@@ -11,10 +14,10 @@ public interface ReportCreationService {
 	 * This will create and save street planning report
 	 * @param reportModel
 	 */
-	public void createAndSaveStreetPlanningReport(ReportModel reportModel);
+	public void createAndSaveStreetPlanningReport(StreetModel reportModel);
 	/**
 	 * This will create newspaper delivery report
 	 * @param reportModel
 	 */
-	public void createAndSaveNewspaperDeliveryReport(ReportModel reportModel);
+	public void createAndSaveNewspaperDeliveryReport(List<NewspaperReportModel> newspaperReportModel);
 }

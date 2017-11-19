@@ -1,6 +1,8 @@
 package com.nish.streetfileprocessor.validation;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +40,10 @@ public class StreetFileValidatorImpl implements StreetFileValidator{
 	@Override
 	public boolean isHouseNumberStartsWithOne(final List<Integer> houseNumbers) {
 		log.info("Validating isHouseNumberStartsWithOne");
-		Collections.sort(houseNumbers);
-		return (houseNumbers.get(0) != null && houseNumbers.get(0).intValue() == 1);
+		List<Integer> copyied = new ArrayList<>(houseNumbers.size());
+		copyied.addAll(houseNumbers);
+		copyied.sort(Comparator.naturalOrder());
+		Collections.sort(copyied);
+		return (copyied.get(0) != null && copyied.get(0).intValue() == 1);
 	}
 }
