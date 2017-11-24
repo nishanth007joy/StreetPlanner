@@ -16,13 +16,12 @@ import org.slf4j.LoggerFactory;
 
 import com.nish.streetfileprocessor.StreetFileProcessorApplication;
 import com.nish.streetfileprocessor.exception.StreetFileProcessingException;
-import com.nish.streetfileprocessor.steprunner.stepdef.base.SpringIntegrationTest;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class StepDefs extends SpringIntegrationTest{
+public class StepDefs{
 	private static final Logger log = LoggerFactory.getLogger(StepDefs.class);
 
 	private String output = null;
