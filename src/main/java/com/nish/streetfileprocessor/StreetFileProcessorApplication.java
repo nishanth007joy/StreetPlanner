@@ -32,7 +32,7 @@ public class StreetFileProcessorApplication implements CommandLineRunner{
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		log.info("Pocessing with action as "+action);
+		log.info("Pocessing with action as {}",action);
 		if (action.equals("VALIDATE_AND_PROCESS")) {
 			processStreetFile.validateAndGroupStreetFile(fileLocation);
 		} else if(action.equals("NEWS_PAPER_DELIVERY_REPORT")){

@@ -23,7 +23,6 @@ public class StreetFileValidationServiceImpl implements StreetFileValidationServ
 		List<ValidationCode> validationErrors = null;
 		if(!streetFileValidator.isHouseNumberStartsWithOne(houseNumbers)){
 			log.info("Validated failed for House number started with 1");
-			if(null == validationErrors)
 				validationErrors = new ArrayList<>();
 			validationErrors.add(ValidationCode.HOUSE_NUMBER_NOT_STARTING_WITH_ONE);
 		}

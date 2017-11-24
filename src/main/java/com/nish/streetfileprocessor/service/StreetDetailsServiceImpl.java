@@ -1,5 +1,6 @@
 package com.nish.streetfileprocessor.service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class StreetDetailsServiceImpl implements StreetDetailsService{
 	@Override
 	public List<Integer> getNorthHouseNumbers(List<Integer> houseNumbers) {
 		if(null == houseNumbers){
-			return null;
+			return Collections.emptyList();
 		}
 		return houseNumbers.stream().sorted(Comparator.naturalOrder()).filter(houseNum -> houseNum % 2 != 0).collect(Collectors.toList());
 	}
@@ -24,7 +25,7 @@ public class StreetDetailsServiceImpl implements StreetDetailsService{
 	@Override
 	public List<Integer> getSouthHouseNumbers(List<Integer> houseNumbers) {
 		if(null == houseNumbers){
-			return null;
+			return Collections.emptyList();
 		}
 		return houseNumbers.stream().sorted(Comparator.naturalOrder()).filter(houseNum -> houseNum % 2 == 0).collect(Collectors.toList());
 	}

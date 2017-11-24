@@ -22,7 +22,7 @@ public class StreetDetailsServiceImplTest {
 	@Test
 	public void testGetSouthHouseNumbersWithNullInput() {
 		List<Integer> southHouseNumbers = streetDetailsService.getSouthHouseNumbers(null);
-		assertNull(southHouseNumbers);
+		assertTrue(southHouseNumbers.isEmpty());
 	}
 	/**
 	 * North house numbers filtering methord test for null input
@@ -30,7 +30,7 @@ public class StreetDetailsServiceImplTest {
 	@Test
 	public void testGetNorthHouseNumbersWithNullInput() {
 		List<Integer> northHouseNumbers = streetDetailsService.getNorthHouseNumbers(null);
-		assertNull(northHouseNumbers);
+		assertTrue(northHouseNumbers.isEmpty());
 	}
 	/**
 	 * Test for getting north house numbers from input list

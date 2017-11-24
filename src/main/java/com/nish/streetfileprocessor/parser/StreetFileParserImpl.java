@@ -29,6 +29,6 @@ public class StreetFileParserImpl implements StreetFileParser{
 			return Collections.unmodifiableList(houseNumbers);
 		}
 		
-		return null;
+		return Collections.emptyList();
 	}
 }

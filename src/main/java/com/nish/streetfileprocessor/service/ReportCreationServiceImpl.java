@@ -55,16 +55,18 @@ public class ReportCreationServiceImpl implements ReportCreationService{
 	public void createAndSaveNewspaperDeliveryReport(List<NewspaperReportModel> newspaperReportModels) {
 		StringBuilder reportString = new StringBuilder();
 		for(NewspaperReportModel newspaperReportModel : newspaperReportModels){
-		if(newspaperReportModel != null && newspaperReportModel.getNewspaperDeliveryHouseNumbersInOrder()!=null){
-			reportString.append(newspaperReportModel
-					.getNewspaperDeliveryHouseNumbersInOrder()
-					.stream()
-					.map(String :: valueOf)
-					.collect(Collectors.joining(" "))).append(",");
-		}else{
-			reportString.append(",");
-		}
-		reportString.append(newspaperReportModel.getNoOfTimesRoadCrossed()).append(",").append("\n");
+			if(newspaperReportModel != null){
+				if(newspaperReportModel.getNewspaperDeliveryHouseNumbersInOrder()!=null){
+					reportString.append(newspaperReportModel
+							.getNewspaperDeliveryHouseNumbersInOrder()
+							.stream()
+							.map(String :: valueOf)
+							.collect(Collectors.joining(" "))).append(",");
+				}else{
+					reportString.append(",");
+				}
+				reportString.append(newspaperReportModel.getNoOfTimesRoadCrossed()).append(",").append("\n");
+			}
 		}
 		outputWriter.writeProcessingReport(reportString.toString());
 	}
