@@ -8,17 +8,18 @@ import lombok.Data;
 
 /**
  * This model class hold data after processing a input street file
+ * 
  * @author nismj
  *
  */
 @Data
 public class StreetModel {
 
-	private List<Integer> houseNumbers;
+    private List<Integer> houseNumbers;
 
-	private List<Integer> northNumbers;
+    private List<Integer> northNumbers;
 
-	private List<Integer> southNumbers;
+    private List<Integer> southNumbers;
 
-	private List<ValidationCode> validationMessages;
+    private List<ValidationCode> validationMessages;
 }

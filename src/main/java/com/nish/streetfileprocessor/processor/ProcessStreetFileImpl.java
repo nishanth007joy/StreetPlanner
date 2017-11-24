@@ -19,64 +19,71 @@ import com.nish.streetfileprocessor.validationcode.ValidationCode;
 
 /**
  * This is main processor class which coordinates processing of input file
+ * 
  * @author nisha
  *
  */
 @Component
-public class ProcessStreetFileImpl implements ProcessStreetFile{
-	private static final Logger log = LoggerFactory.getLogger(ProcessStreetFileImpl.class);
-	
-	@Autowired
-	private StreetDetailsFileReaderService streetDetailsFileReaderService;
-	
-	@Autowired
-	private StreetDetailsService streetDetailsService;
-	
-	@Autowired
-	private StreetFileValidationService streetFileValidationService;
-	
-	@Autowired
-	private ReportCreationService reportCreationService;
-	
-	@Autowired
-	private NewspaperDeliveryService newspaperDeliveryService;
+public class ProcessStreetFileImpl implements ProcessStreetFile {
+    private static final Logger log = LoggerFactory.getLogger(ProcessStreetFileImpl.class);
 
-	@Override
-	public void validateAndGroupStreetFile(String inputFileLocation) {
-		StreetModel streetModel = createStreetModel(inputFileLocation);
-		reportCreationService.createAndSaveStreetPlanningReport(streetModel);
-	}
-	private StreetModel createStreetModel(String inputFileLocation){
-		StreetModel streetModel = new StreetModel();
-		String fileContent = streetDetailsFileReaderService.readStreetDetails(inputFileLocation);
-		log.info(fileContent);
-		List<Integer> houseNumbers = streetDetailsFileReaderService.parseStreetFileContent(fileContent);
-		log.info("House numbers after parsing",houseNumbers);
-		List<ValidationCode> validationResults = streetFileValidationService.validateStreetFile(houseNumbers);
-		if(validationResults != null && !validationResults.isEmpty()){
-			log.info("Validation of file failed");
-			streetModel.setValidationMessages(validationResults);
-			reportCreationService.createAndSaveStreetPlanningReport(streetModel);
-			return streetModel;
-		}
-		streetModel.setHouseNumbers(houseNumbers);
-		streetModel.setNorthNumbers(streetDetailsService.getNorthHouseNumbers(houseNumbers));
-		streetModel.setSouthNumbers(streetDetailsService.getSouthHouseNumbers(houseNumbers));
-		return streetModel;
-	}
-	@Override
-	public void createNewspaperDeliveryReport(String inputFileLocation) {
-		StreetModel streetModel = createStreetModel(inputFileLocation);
-		List<NewspaperReportModel> newspaperReportModels = new ArrayList<>();
-		NewspaperReportModel newspaperReportModel = new NewspaperReportModel();
-		newspaperReportModel.setNewspaperDeliveryHouseNumbersInOrder(newspaperDeliveryService.generateEastWestDeliveryReport(streetModel));
-		newspaperReportModel.setNoOfTimesRoadCrossed(newspaperDeliveryService.numberOfTimeRoadCrossedInEastWestDelivery(streetModel));
-		newspaperReportModels.add(newspaperReportModel);
-		newspaperReportModel = new NewspaperReportModel();
-		newspaperReportModel.setNewspaperDeliveryHouseNumbersInOrder(newspaperDeliveryService.generateNorthThenSouthDeliveryReport(streetModel));
-		newspaperReportModel.setNoOfTimesRoadCrossed(newspaperDeliveryService.numberOfTimeRoadCrossedInNothSouthDelivey(streetModel));
-		newspaperReportModels.add(newspaperReportModel);
-		reportCreationService.createAndSaveNewspaperDeliveryReport(newspaperReportModels);
-	}
+    @Autowired
+    private StreetDetailsFileReaderService streetDetailsFileReaderService;
+
+    @Autowired
+    private StreetDetailsService streetDetailsService;
+
+    @Autowired
+    private StreetFileValidationService streetFileValidationService;
+
+    @Autowired
+    private ReportCreationService reportCreationService;
+
+    @Autowired
+    private NewspaperDeliveryService newspaperDeliveryService;
+
+    @Override
+    public void validateAndGroupStreetFile(String inputFileLocation) {
+        StreetModel streetModel = createStreetModel(inputFileLocation);
+        reportCreationService.createAndSaveStreetPlanningReport(streetModel);
+    }
+
+    private StreetModel createStreetModel(String inputFileLocation) {
+        StreetModel streetModel = new StreetModel();
+        String fileContent = streetDetailsFileReaderService.readStreetDetails(inputFileLocation);
+        log.info(fileContent);
+        List<Integer> houseNumbers = streetDetailsFileReaderService.parseStreetFileContent(fileContent);
+        log.info("House numbers after parsing", houseNumbers);
+        List<ValidationCode> validationResults = streetFileValidationService.validateStreetFile(houseNumbers);
+        if (validationResults != null && !validationResults.isEmpty()) {
+            log.info("Validation of file failed");
+            streetModel.setValidationMessages(validationResults);
+            reportCreationService.createAndSaveStreetPlanningReport(streetModel);
+            return streetModel;
+        }
+        streetModel.setHouseNumbers(houseNumbers);
+        streetModel.setNorthNumbers(streetDetailsService.getNorthHouseNumbers(houseNumbers));
+        streetModel.setSouthNumbers(streetDetailsService.getSouthHouseNumbers(houseNumbers));
+        return streetModel;
+    }
+
+    @Override
+    public void createNewspaperDeliveryReport(String inputFileLocation) {
+        StreetModel streetModel = createStreetModel(inputFileLocation);
+        List<NewspaperReportModel> newspaperReportModels = new ArrayList<>();
+        NewspaperReportModel newspaperReportModel = new NewspaperReportModel();
+        newspaperReportModel.setNewspaperDeliveryHouseNumbersInOrder(
+                newspaperDeliveryService.generateEastWestDeliveryReport(streetModel));
+        newspaperReportModel.setNoOfTimesRoadCrossed(
+                newspaperDeliveryService.numberOfTimeRoadCrossedInEastWestDelivery(streetModel));
+        newspaperReportModels.add(newspaperReportModel);
+        newspaperReportModel = new NewspaperReportModel();
+        newspaperReportModel.setNewspaperDeliveryHouseNumbersInOrder(
+                newspaperDeliveryService.generateNorthThenSouthDeliveryReport(streetModel));
+        newspaperReportModel.setNoOfTimesRoadCrossed(
+                newspaperDeliveryService.numberOfTimeRoadCrossedInNothSouthDelivey(streetModel));
+        newspaperReportModels.add(newspaperReportModel);
+        reportCreationService.createAndSaveNewspaperDeliveryReport(newspaperReportModels);
+    }
 
 }

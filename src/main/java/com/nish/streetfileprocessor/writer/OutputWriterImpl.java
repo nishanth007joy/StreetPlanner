@@ -18,17 +18,18 @@ import com.nish.streetfileprocessor.exception.StreetFileProcessingException;
  *
  */
 @Component
-public class OutputWriterImpl implements OutputWriter{
-	private static final Logger log = LoggerFactory.getLogger(OutputWriterImpl.class);
-	@Override
-	public void writeProcessingReport(String reportText) {
-		Path path = Paths.get("src/main/resources/streetfile/output/output.csv");
-		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-			writer.write(reportText);
-			writer.flush();
-		} catch (IOException e) {
-			log.error(e.getMessage(),e);
-			throw new StreetFileProcessingException("Error in writing report", e);
-		}
-	}
+public class OutputWriterImpl implements OutputWriter {
+    private static final Logger log = LoggerFactory.getLogger(OutputWriterImpl.class);
+
+    @Override
+    public void writeProcessingReport(String reportText) {
+        Path path = Paths.get("src/main/resources/streetfile/output/output.csv");
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            writer.write(reportText);
+            writer.flush();
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+            throw new StreetFileProcessingException("Error in writing report", e);
+        }
+    }
 }

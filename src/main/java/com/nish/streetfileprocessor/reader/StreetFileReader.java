@@ -6,9 +6,9 @@ package com.nish.streetfileprocessor.reader;
  *
  */
 public interface StreetFileReader {
-	/**
-	 * 
-	 * @return
-	 */
-	public String readFile(String fileLocation);
+    /**
+     * 
+     * @return
+     */
+    public String readFile(String fileLocation);
 }

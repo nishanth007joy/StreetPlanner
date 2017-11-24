@@ -12,24 +12,24 @@ import com.nish.streetfileprocessor.processor.ProcessStreetFileImpl;
 import com.nish.streetfileprocessor.reader.StreetFileReader;
 
 @Service
-public class StreetDetailsFileReaderServiceImpl implements StreetDetailsFileReaderService{
-	private static final Logger log = LoggerFactory.getLogger(ProcessStreetFileImpl.class);
-	@Autowired
-	private StreetFileReader streetFileReader;
-	
-	@Autowired
-	private StreetFileParser streetFileParser;
-	
-	@Override
-	public String readStreetDetails(final String fileLocation) {
-		String fileContent = streetFileReader.readFile(fileLocation);
-		log.debug(fileContent);
-		return fileContent;
-	}
+public class StreetDetailsFileReaderServiceImpl implements StreetDetailsFileReaderService {
+    private static final Logger log = LoggerFactory.getLogger(ProcessStreetFileImpl.class);
+    @Autowired
+    private StreetFileReader streetFileReader;
 
-	@Override
-	public List<Integer> parseStreetFileContent(String fileContent) {
-		return streetFileParser.parseHouseNumberFromSteetFile(fileContent);
-	}
+    @Autowired
+    private StreetFileParser streetFileParser;
+
+    @Override
+    public String readStreetDetails(final String fileLocation) {
+        String fileContent = streetFileReader.readFile(fileLocation);
+        log.debug(fileContent);
+        return fileContent;
+    }
+
+    @Override
+    public List<Integer> parseStreetFileContent(String fileContent) {
+        return streetFileParser.parseHouseNumberFromSteetFile(fileContent);
+    }
 
 }

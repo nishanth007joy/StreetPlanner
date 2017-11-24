@@ -13,37 +13,38 @@ import org.springframework.stereotype.Component;
 
 /**
  * House number validation implementation
+ * 
  * @author nismj
  *
  */
 @Component
-public class StreetFileValidatorImpl implements StreetFileValidator{
-	private static final Logger log = LoggerFactory.getLogger(StreetFileValidatorImpl.class);
+public class StreetFileValidatorImpl implements StreetFileValidator {
+    private static final Logger log = LoggerFactory.getLogger(StreetFileValidatorImpl.class);
 
-	@Override
-	public boolean checkDuplicateHouseNumber(final List<Integer> houseNumbers) {
-		log.info("Validating checkDuplicateHouseNumber");
-		Set<Integer> houseNumberSet = new HashSet<>(houseNumbers);
-		return (houseNumberSet.size() < houseNumbers.size());
-	}
+    @Override
+    public boolean checkDuplicateHouseNumber(final List<Integer> houseNumbers) {
+        log.info("Validating checkDuplicateHouseNumber");
+        Set<Integer> houseNumberSet = new HashSet<>(houseNumbers);
+        return (houseNumberSet.size() < houseNumbers.size());
+    }
 
-	@Override
-	public boolean checkMissingNumber(final List<Integer> houseNumbers) {
-		log.info("Validating checkMissingNumber");
-		int lengthOfHiuseNumber = houseNumbers.size();
-		int totalOfHouseNumber = lengthOfHiuseNumber*(lengthOfHiuseNumber+1)/2;
-		int totalOfHouseNumberFromFile = houseNumbers.stream().mapToInt(Integer::intValue).sum();
-		int missingNumber  = totalOfHouseNumber - totalOfHouseNumberFromFile;
-		return (missingNumber != 0);
-	}
+    @Override
+    public boolean checkMissingNumber(final List<Integer> houseNumbers) {
+        log.info("Validating checkMissingNumber");
+        int lengthOfHiuseNumber = houseNumbers.size();
+        int totalOfHouseNumber = lengthOfHiuseNumber * (lengthOfHiuseNumber + 1) / 2;
+        int totalOfHouseNumberFromFile = houseNumbers.stream().mapToInt(Integer::intValue).sum();
+        int missingNumber = totalOfHouseNumber - totalOfHouseNumberFromFile;
+        return (missingNumber != 0);
+    }
 
-	@Override
-	public boolean isHouseNumberStartsWithOne(final List<Integer> houseNumbers) {
-		log.info("Validating isHouseNumberStartsWithOne");
-		List<Integer> copyied = new ArrayList<>(houseNumbers.size());
-		copyied.addAll(houseNumbers);
-		copyied.sort(Comparator.naturalOrder());
-		Collections.sort(copyied);
-		return (copyied.get(0) != null && copyied.get(0).intValue() == 1);
-	}
+    @Override
+    public boolean isHouseNumberStartsWithOne(final List<Integer> houseNumbers) {
+        log.info("Validating isHouseNumberStartsWithOne");
+        List<Integer> copyied = new ArrayList<>(houseNumbers.size());
+        copyied.addAll(houseNumbers);
+        copyied.sort(Comparator.naturalOrder());
+        Collections.sort(copyied);
+        return (copyied.get(0) != null && copyied.get(0).intValue() == 1);
+    }
 }
