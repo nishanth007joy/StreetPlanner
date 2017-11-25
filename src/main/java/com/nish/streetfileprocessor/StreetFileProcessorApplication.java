@@ -22,7 +22,7 @@ public class StreetFileProcessorApplication implements CommandLineRunner {
     @Autowired
     ProcessStreetFile processStreetFile;
 
-    @Value("${action:default}")
+    @Value("${action:VALIDATE_AND_PROCESS}")
     private String action;
 
     @Value("${app.file.home}")
